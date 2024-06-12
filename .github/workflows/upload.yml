@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        ref: master
+        ref: main
     - name: Run
       run: |
         Invoke-WebRequest https://get.enterprisedb.com/postgresql/postgresql-16.2-1-windows-x64.exe -OutFile pgoutfile
