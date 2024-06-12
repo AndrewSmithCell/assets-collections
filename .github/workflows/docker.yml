@@ -28,6 +28,6 @@ jobs:
         files: |
           redis-4.0-alpine.tar
           postgres-10-alpine.tar
-          udge-1.6.1.tar
+          judge-1.6.1.tar
           backend-1.6.1.tar
         tag_name: ${{ github.event.inputs.tags }}
