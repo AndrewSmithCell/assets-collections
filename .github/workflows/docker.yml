@@ -1,0 +1,33 @@
+name: Pull docker
+on: 
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'tags to create build'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: main
+    - name: Run
+      run: |
+        docker pull redis:4.0-alpine
+        docker pull postgres:10-alpine
+        docker pull registry.cn-hongkong.aliyuncs.com/oj-image/judge:1.6.1
+        docker pull registry.cn-hongkong.aliyuncs.com/oj-image/backend:1.6.1
+        docker save --output redis-4.0-alpine.tar redis:4.0-alpine
+        docker save --output postgres-10-alpine.tar postgres:10-alpine
+        docker save --output judge-1.6.1.tar registry.cn-hongkong.aliyuncs.com/oj-image/judge:1.6.1
+        docker save --output backend-1.6.1.tar registry.cn-hongkong.aliyuncs.com/oj-image/backend:1.6.1
+    - name: create release and upload assets
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          redis-4.0-alpine.tar
+          postgres-10-alpine.tar
+          udge-1.6.1.tar
+          backend-1.6.1.tar
+        tag_name: ${{ github.event.inputs.tags }}
