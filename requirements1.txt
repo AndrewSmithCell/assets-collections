@@ -48,7 +48,7 @@ pylinkvalidator
 PyOpenGL
 PyOpenGL-accelerate
 python-dateutil
-python-sockerio
+python-socketio
 pyvips
 pywin32
 pyyaml
