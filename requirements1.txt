@@ -4,7 +4,6 @@ django-cas-ng
 django-celery-results
 django-cors-headers
 django-dbconn-retry
-django-øtiq
 django-environ
 django-extensions
 django-filter
@@ -17,7 +16,6 @@ djangorestframework
 djangorestframework-simplejwt
 drf-jwt
 drf-spectacular
-øtiq
 entrypoints
 Envelopes
 eventlet
