@@ -1,0 +1,31 @@
+name: Upload requirements
+on: 
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'tags to create build'
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions: write-all
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: main
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'         
+    - name: Run
+      run: |
+        pip download -r requirements1.txt
+    - name: Archive Release 1
+      uses: thedoctor0/zip-release@0.7.5
+      with:
+        type: '7z'
+        filename: 'requirements.1'
+    - name: create release and upload assets
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          requirements.1
+        tag_name: ${{ github.event.inputs.tags }}
