@@ -1,4 +1,3 @@
-python packages:
 celery
 coverage
 django-cas-ng
