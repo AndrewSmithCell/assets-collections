@@ -1,4 +1,4 @@
-name: Pull docker & packages
+name: Pull docker and packages
 on: 
   workflow_dispatch:
     inputs:
