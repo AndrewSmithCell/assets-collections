@@ -17,7 +17,7 @@ jobs:
         python-version: '3.10'         
     - name: Run
       run: |
-        pip download -r requirements1.txt
+        pip download -r requirements2.txt
     - name: Archive Release 1
       uses: thedoctor0/zip-release@0.7.5
       with:
