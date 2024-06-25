@@ -66,6 +66,6 @@ foreach($Extension in $extensions) {
     $version = $extension.versions[0].version
 
     $uri = "$($extension.Versions[0].assetUri)/Microsoft.VisualStudio.Services.VSIXPackage"
-    Invoke-WebRequest -uri $uri -OutFile (Join-Path "$publisher.$extensionName.$version.VSIX")
+    Invoke-WebRequest -uri $uri -OutFile "$publisher.$extensionName.$version.VSIX"
 }
 
