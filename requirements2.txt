@@ -9,7 +9,6 @@ hiredis
 pytest-cov
 pytest-django
 redis
-uwsgi
 black
 autopep8
 yapf
