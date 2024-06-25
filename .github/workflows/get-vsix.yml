@@ -13,8 +13,9 @@ jobs:
       with:
         ref: main
     - name: Run
+      shell: pwsh
       run: |
-        ./download-vsix.ps1
+        .\download-vsix.ps1
     - name: Archive Release 1
       uses: thedoctor0/zip-release@0.7.5
       with:
