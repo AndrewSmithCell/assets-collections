@@ -25,6 +25,7 @@ $extensions = @(
     "ms-python.pylint";
     "ms-python.black-formatter";
     "ms-python.autopep8";
+    "charliermarsh.ruff";
 )
 $body=@{
     filters = ,@{
