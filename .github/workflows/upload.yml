@@ -12,26 +12,18 @@ jobs:
     - uses: actions/checkout@v4
       with:
         ref: main
-    - name: Run
-      run: |
-        Invoke-WebRequest https://get.enterprisedb.com/postgresql/postgresql-16.2-1-windows-x64.exe -OutFile pgoutfile
-        Invoke-WebRequest https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi -OutFile crfile
-    - name: Archive Release 1
+    - name: Install Foundry
+      uses: foundry-rs/foundry-toolchain@v1
+    - name: Run build
+      run: forge build
+    - name: Archive Release
       uses: thedoctor0/zip-release@0.7.5
       with:
         type: '7z'
-        path: 'pgoutfile'
-        filename: 'pgoutfile.1'
-    - name: Archive Release 3
-      uses: thedoctor0/zip-release@0.7.5
-      with:
-        type: '7z'
-        path: 'crfile'
-        filename: 'crfile.1'
+        filename: 'archive.z'
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          pgoutfile.1
-          crfile.1
+          archive.z
         tag_name: ${{ github.event.inputs.tags }}
