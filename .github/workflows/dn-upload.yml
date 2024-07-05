@@ -1,0 +1,23 @@
+name: DN upload
+on: 
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'tags to create build'
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions: write-all
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: main
+    - name: Run
+      run: |
+        Invoke-WebRequest https://update.code.visualstudio.com/latest/win32-x64/stable -OutFile vscode
+    - name: create release and upload assets
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          vscode
+        tag_name: ${{ github.event.inputs.tags }}
