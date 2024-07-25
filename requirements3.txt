@@ -1,0 +1,10 @@
+mkdocs-material
+mkdocs-macros-plugin
+mkdocs-literate-nav
+mkdocs-git-authors-plugin
+mkdocs-git-revision-date-localized-plugin
+mkdocs-simple-hooks
+mkdocs-rss-plugin
+gitpython
+watchdog
+beautifulsoup4
