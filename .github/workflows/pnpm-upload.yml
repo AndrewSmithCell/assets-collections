@@ -1,0 +1,46 @@
+name: Create Archive
+on: 
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'tags to create build'
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions: write-all
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: master
+    - name: Setup node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - name: install pnpm
+      uses: pnpm/action-setup@v4
+    - name: pnpm install
+      run: |
+        pnpm init
+        pnpm install @emotion/react @emotion/styled @mui/icons-material @mui/material @reduxjs/toolkit react react-dom react-redux react-router-dom @types/react @types/node @types/react-dom @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-react @vitejs/plugin-react-swc eslint-config-prettier eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-tailwindcss typescript prettier vite autoprefixer eslint@8.X happy-dom postcss tailwindcss vite-tsconfig-paths vitest codemirror@5.X @types/codemirror@5.X @types/d3 react-helmet react-helmet-async @fortune-sheet/react react-lazyload react-i18next i18next i18next-resources-for-ts marked diff @types/diff diff2html markdown-it @types/markdown-it socket.io-client @types/socket.io-client @types/uuid simplebar @types/simplebar @types/events quill quill-markdown-shortcuts
+    - name: Archive Release source
+      uses: thedoctor0/zip-release@0.7.5
+      with:
+        type: '7z'
+        filename: 'release.7z'
+        exclusions: node_modules
+    - name: Archive Release packages
+      shell: bash
+      run: |
+        "/c/Program Files/7-Zip/7z.exe" a -m0=lzma2 -mx t1.7z "D:\.pnpm-store"
+    - name: Archive Release cache
+      shell: bash
+      run: |
+        "/c/Program Files/7-Zip/7z.exe" a -m0=lzma2 -mx t2.7z "C:\Users\runneradmin\AppData\Local\pnpm-cache"
+    - name: create release and upload assets
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          release.7z
+          t1.7z
+          t2.7z
+        tag_name: ${{ github.event.inputs.tags }}
