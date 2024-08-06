@@ -20,6 +20,7 @@ jobs:
     - name: List files
       run: |
           ls -a
+          ls -a /usr/share/ollama
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
