@@ -21,7 +21,7 @@ jobs:
       run: |
         sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v20m x.tar.gz /usr/share/ollama
         git checkout -b feature/with-model
-        git add -am "with model"
+        git commit -am "with model"
         git push -u origin HEAD
     - name: List files
       run: |
