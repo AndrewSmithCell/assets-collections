@@ -15,7 +15,7 @@ jobs:
         ollama pull llama3.1
     - name: zip file
       run: |
-        7z a -v200m x.tar.gz /usr/share/ollama
+        7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v200m x.tar.gz /usr/share/ollama
     - name: List files
       run: |
           ls -a
