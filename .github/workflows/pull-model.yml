@@ -7,6 +7,7 @@ on:
 jobs:
   summarize:
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
     - name: Install ollama
       run: curl -fsSL https://ollama.com/install.sh | sh
