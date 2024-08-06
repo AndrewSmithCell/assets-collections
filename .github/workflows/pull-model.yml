@@ -1,0 +1,33 @@
+name: pull-ollama-llm
+on: 
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'tags to create build'
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install ollama
+      run: curl -fsSL https://ollama.com/install.sh | sh
+    - name: Run ollama and pull
+      run: 
+        ollama pull llama3.1
+    - name: zip file
+      run: |
+        7z a -v200m x.tar.gz ~/.ollama/
+    - name: List files
+      run: |
+          ls -a
+    - name: create release and upload assets
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          x.tar.gz.001
+          x.tar.gz.002
+          x.tar.gz.003
+          x.tar.gz.004
+        tag_name: ${{ github.event.inputs.tags }}
+      
+
+      
