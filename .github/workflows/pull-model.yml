@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: main    
     - name: Install ollama
       run: curl -fsSL https://ollama.com/install.sh | sh
     - name: Run ollama and pull
