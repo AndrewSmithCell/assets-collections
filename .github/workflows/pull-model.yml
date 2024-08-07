@@ -21,7 +21,7 @@ jobs:
         git checkout -b feature/with-model
         git add .
         git commit -m "generated"
-        git push -u origin HEAD
+        git push -f -u origin HEAD
     - name: List files
       run: |
           ls -a
