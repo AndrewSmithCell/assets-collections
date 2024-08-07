@@ -20,8 +20,14 @@ jobs:
     - name: zip file
       run: |
         sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v20m x.tar.gz /usr/share/ollama
+    - uses: actions/checkout@v3
+    - run: |
+        date > generated.txt
+        git config user.name github-actions
+        git config user.email github-actions@github.com
         git checkout -b feature/with-model
-        git commit -am "with model"
+        git add .
+        git commit -m "generated"
         git push -u origin HEAD
     - name: List files
       run: |
