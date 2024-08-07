@@ -9,20 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
-    - uses: actions/checkout@v4
-      with:
-        ref: main    
-    - name: Install ollama
-      run: curl -fsSL https://ollama.com/install.sh | sh
-    - name: Run ollama and pull
-      run: 
-        ollama pull llama3.1
-    - name: zip file
-      run: |
-        sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v20m x.tar.gz /usr/share/ollama
     - uses: actions/checkout@v3
     - run: |
-        date > generated.txt
+        curl -fsSL https://ollama.com/install.sh | sh
+        ollama pull llama3.1
+        sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v20m x.tar.gz /usr/share/ollama
         git config user.name github-actions
         git config user.email github-actions@github.com
         git checkout -b feature/with-model
