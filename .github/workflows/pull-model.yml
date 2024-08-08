@@ -16,15 +16,16 @@ jobs:
     - uses: actions/checkout@v3
     - run: |
         sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v20m x.tar.gz /usr/share/ollama
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        git add .
-        git commit -m "generated"
-        git push -u origin HEAD
     - name: List files
       run: |
           ls -a
           ls -R /usr/share/ollama
+    - name: create release and upload assets
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          x.tar.gz.*
+        tag_name: ${{ github.event.inputs.tags }}
       
 
       
