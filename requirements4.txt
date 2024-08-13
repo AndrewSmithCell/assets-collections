@@ -3,7 +3,6 @@ pandas
 scipy
 matplotlib
 IPython
-mpl_toolkits
 seaborn
 prettyplotlib
 python-ternary
