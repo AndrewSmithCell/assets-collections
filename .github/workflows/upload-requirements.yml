@@ -17,15 +17,12 @@ jobs:
         python-version: '3.10'         
     - name: Run
       run: |
-        pip download -r requirements3.txt
-    - name: Archive Release 1
-      uses: thedoctor0/zip-release@0.7.5
-      with:
-        type: '7z'
-        filename: 'requirements.1'
+        pip download -r requirements4.txt
+    - run: |
+        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v20m x.tar.gz .
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          requirements.1
+          x.tar.gz.*
         tag_name: ${{ github.event.inputs.tags }}
