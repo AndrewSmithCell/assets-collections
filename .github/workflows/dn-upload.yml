@@ -16,12 +16,15 @@ jobs:
       run: |
         Invoke-WebRequest https://openaipublic.azureedge.net/main/whisper/models/9ecf779972d90ba49c06d968637d720dd632c55bbf19d441fb42bf17a411e794/small.pt -OutFile small.pt
         Invoke-WebRequest https://openaipublic.azureedge.net/main/whisper/models/f953ad0fd29cacd07d5a9eda5624af0f6bcf2258be67c92b79389873d91e0872/small.en.pt -OutFile small.en.pt
-        Invoke-WebRequest https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-msvc/rustup-init.exe -OutFile rustup-init.exe
+    - name: Run
+      shell: bash
+      run: |
+        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v20m small.pt.z small.pt        
+        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v20m small.en.pt.z small.en.pt        
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          small.pt
-          small.en.pt
-          rustup-init.exe
+          small.pt.*
+          small.en.pt.*
         tag_name: ${{ github.event.inputs.tags }}
