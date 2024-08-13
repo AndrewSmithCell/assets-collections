@@ -13,7 +13,6 @@ pandas
 polars
 Arctic
 bottleneck
-BeautifulSoup
 Scrapy
 PyTorch
 pytorch-lightning
