@@ -14,10 +14,14 @@ jobs:
         ref: main
     - name: Run
       run: |
-        Invoke-WebRequest https://update.code.visualstudio.com/latest/win32-x64/stable -OutFile vscode
+        Invoke-WebRequest https://openaipublic.azureedge.net/main/whisper/models/9ecf779972d90ba49c06d968637d720dd632c55bbf19d441fb42bf17a411e794/small.pt -OutFile small.pt
+        Invoke-WebRequest https://openaipublic.azureedge.net/main/whisper/models/f953ad0fd29cacd07d5a9eda5624af0f6bcf2258be67c92b79389873d91e0872/small.en.pt -OutFile small.en.pt
+        Invoke-WebRequest https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-msvc/rustup-init.exe -OutFile rustup-init.exe
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          vscode
+          small.pt
+          small.en.pt
+          rustup-init.exe
         tag_name: ${{ github.event.inputs.tags }}
