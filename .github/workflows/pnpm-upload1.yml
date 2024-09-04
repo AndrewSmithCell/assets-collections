@@ -23,7 +23,7 @@ jobs:
     - name: pnpm install
       run: |
         pnpm init
-        pnpm install quill-markdown-shortcuts react-quill quill-mention quill-markdown-toolbar quill-paste-smart quill-placeholder-module quill-placeholder-autocomplete-module quill-image-resize-module quill-image-drop-module quill-image-compress quill-html-edit-button md-to-quill-delta quill-dropzone antd 
+        pnpm install quill-markdown-shortcuts react-quill quill-mention quill-markdown-toolbar quill-paste-smart quill-placeholder-module quill-placeholder-autocomplete-module quill-image-resize-module quill-image-drop-module quill-image-compress quill-html-edit-button md-to-quill-delta antd 
     - name: Archive Release source
       uses: thedoctor0/zip-release@0.7.5
       with:
