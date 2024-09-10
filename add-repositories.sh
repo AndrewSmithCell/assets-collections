@@ -1,4 +1,5 @@
 apt-get update
+sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.sources
 apt-get install -y ca-certificates curl gnupg
 curl -fsSL https://packages.adoptium.net/artifactory/api/gpg/key/public | gpg --dearmor -o /etc/apt/keyrings/adoptium.gpg
 cat > /etc/apt/sources.list.d/adoptium.sources <<EOF
