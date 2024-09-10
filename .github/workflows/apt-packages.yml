@@ -16,8 +16,8 @@ jobs:
       run: |
         mkdir packages
         cd packages
-        apt-get update
-        apt-get install -y ca-certificates curl gnupg
+        sudo apt-get update
+        sudo apt-get install -y ca-certificates curl gnupg
         curl -fsSL https://packages.adoptium.net/artifactory/api/gpg/key/public | gpg --dearmor -o /etc/apt/keyrings/adoptium.gpg
         cat > /etc/apt/sources.list.d/adoptium.sources <<EOF
         Types: deb
@@ -34,7 +34,7 @@ jobs:
         Components: main
         Signed-By:/etc/apt/keyrings/nodesource.gpg
         EOF
-        apt-get update        
+        sudo apt-get update        
         sudo apt -d build-dep libtool make cmake libseccomp-dev gcc python3 python3-venv python3.12-minimal python3.12-venv libpython3.12-stdlib libpython3.12-dev golang-1.22-go temurin-21-jdk gcc-13 g++-13 nodejs strace ca-certificates curl gnupg
     - name: Archive Release 1
       uses: thedoctor0/zip-release@0.7.5
