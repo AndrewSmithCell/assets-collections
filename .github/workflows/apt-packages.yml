@@ -17,7 +17,7 @@ jobs:
         mkdir packages
         cd packages
         sudo bash ../add-repositories.sh
-        sudo apt -d libtool make cmake libseccomp-dev gcc python3 python3-venv golang-1.22-go temurin-21-jdk gcc-13 g++-13 nodejs strace ca-certificates curl gnupg
+        sudo apt --download-only install libtool make cmake libseccomp-dev gcc python3 python3-venv golang-1.22-go temurin-21-jdk gcc-13 g++-13 nodejs strace ca-certificates curl gnupg
     - name: Archive Release 1
       uses: thedoctor0/zip-release@0.7.5
       with:
