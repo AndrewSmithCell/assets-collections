@@ -14,11 +14,11 @@ jobs:
         ref: main
     - name: Run
       run: |
-        docker pull ghcr.io/open-webui/open-webui:main
-        docker save --output open-webui.tar ghcr.io/open-webui/open-webui:main
+        docker pull registry.cn-hangzhou.aliyuncs.com/onlinejudge/oj_rsync
+        docker save --output oj_rsync.tar registry.cn-hangzhou.aliyuncs.com/onlinejudge/oj_rsync
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          open-webui.tar
+          oj_rsync.tar
         tag_name: ${{ github.event.inputs.tags }}
