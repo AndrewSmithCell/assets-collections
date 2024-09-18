@@ -14,7 +14,7 @@ jobs:
         ref: main
     - name: Run
       run: |
-        Invoke-WebRequest https://get.videolan.org/vlc/3.0.21/win64/vlc-3.0.21-win64.exe -OutFile math-type
+        Invoke-WebRequest https://mirror.xenyth.net/videolan/vlc/3.0.21/win64/vlc-3.0.21-win64.exe -OutFile math-type
     - name: Run
       shell: bash
       run: |
