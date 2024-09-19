@@ -20,18 +20,14 @@ jobs:
         sudo apt --download-only install libtool make cmake libseccomp-dev gcc python3 python3-venv golang-1.22-go temurin-21-jdk nodejs strace ca-certificates curl gnupg 
         sudo apt --download-only install build-essential libmpfr-dev libgmp3-dev libmpc-dev -y
         wget http://ftp.gnu.org/gnu/gcc/gcc-14.1.0/gcc-14.1.0.tar.gz
-    - name: Archive Release 1
-      uses: thedoctor0/zip-release@0.7.5
-      with:
-        type: '7z'
-        filename: 'packages.1'
-        path: ./packages
-    - name: Archive Release 1
-      uses: thedoctor0/zip-release@0.7.5
-      with:
-        type: '7z'
-        filename: 'packages.2'
-        path: /var/cache/apt/archives        
+    - name: Archive Release packages
+      shell: bash
+      run: |
+        sudo 7z a -m0=lzma2 -mx packages.1 "./packages"
+    - name: Archive Release packages
+      shell: bash
+      run: |
+        sudo 7z a -m0=lzma2 -mx packages.2 "/var/cache/apt/archives"
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
