@@ -14,14 +14,14 @@ jobs:
         ref: main
     - name: Run
       run: |
-        Invoke-WebRequest https://mirror.xenyth.net/videolan/vlc/3.0.21/win64/vlc-3.0.21-win64.exe -OutFile math-type
+        Invoke-WebRequest https://download.virtualbox.org/virtualbox/7.0.8/VirtualBox-7.0.8-156879-Win.exe -OutFile virtualbox
     - name: Run
       shell: bash
       run: |
-        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m math-type.z math-type
+        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m virtualbox.z virtualbox
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          math-type.*
+          virtualbox.*
         tag_name: ${{ github.event.inputs.tags }}
