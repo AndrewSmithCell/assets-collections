@@ -6,7 +6,7 @@ on:
         description: 'tags to create build'
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     permissions: write-all
     steps:
     - uses: actions/checkout@v4
@@ -17,13 +17,10 @@ jobs:
         mkdir packages
         cd packages
         sudo bash ../add-repositories.sh
-        sudo apt --download-only install libtool make cmake libseccomp-dev gcc python3 python3-venv golang-1.22-go temurin-21-jdk nodejs strace ca-certificates curl gnupg 
-        sudo apt --download-only install build-essential libmpfr-dev libgmp3-dev libmpc-dev -y
-        wget http://ftp.gnu.org/gnu/gcc/gcc-14.1.0/gcc-14.1.0.tar.gz
-    - name: Archive Release packages
-      shell: bash
-      run: |
-        sudo 7z a -m0=lzma2 -mx packages.1 "./packages"
+        sudo apt -d install libtool make cmake libseccomp-dev -y --reinstall
+        sudo apt -d install gcc python3 python3-venv golang-1.22-go temurin-21-jdk nodejs strace ca-certificates curl gnupg -y --reinstall
+        sudo apt -d install build-essential libmpfr-dev libgmp3-dev libmpc-dev -y --reinstall
+        sudo apt -d install python3.10 python3.10-venv lsb-release --reinstall
     - name: Archive Release packages
       shell: bash
       run: |
