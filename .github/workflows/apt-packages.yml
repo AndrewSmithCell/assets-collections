@@ -20,7 +20,7 @@ jobs:
         # sudo apt -d install libtool make cmake libseccomp-dev -y --reinstall
         # sudo apt -d install gcc python3 python3-venv golang-1.22-go temurin-21-jdk nodejs strace ca-certificates curl gnupg -y --reinstall
         # sudo apt -d install build-essential libmpfr-dev libgmp3-dev libmpc-dev -y --reinstall
-        sudo dpkg -l | grep "^ii"| awk ' {print $2} ' | xargs sudo apt-get -y --force-yes install --reinstall --download-only
+        sudo dpkg -l | grep "^ii"| awk ' {print $2} ' | xargs sudo apt-get download --force-overwrite
     - name: Archive Release packages
       shell: bash
       run: |
