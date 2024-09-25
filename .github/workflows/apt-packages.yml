@@ -6,7 +6,7 @@ on:
         description: 'tags to create build'
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     permissions: write-all
     steps:
     - uses: actions/checkout@v4
