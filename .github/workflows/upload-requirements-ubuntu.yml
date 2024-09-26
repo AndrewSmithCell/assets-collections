@@ -1,0 +1,33 @@
+name: Upload requirements
+on: 
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'tags to create build'
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    permissions: write-all
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: main
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'         
+    - name: Run
+      run: |
+        pip download -r requirements1.txt
+        pip download -r requirements2.txt
+        pip download -r requirements3.txt
+        pip download -r requirements5.txt
+    - name: Run
+      shell: bash
+      run: |
+        7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m x.tar.gz .
+    - name: create release and upload assets
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          x.tar.gz.*
+        tag_name: ${{ github.event.inputs.tags }}
