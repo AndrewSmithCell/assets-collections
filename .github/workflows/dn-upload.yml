@@ -14,14 +14,14 @@ jobs:
         ref: main
     - name: Run
       run: |
-        Invoke-WebRequest https://aka.ms/wslubuntu2204 -OutFile wslubuntu2204
+        Invoke-WebRequest https://go.microsoft.com/fwlink/?LinkID=760868 -OutFile vscode
     - name: Run
       shell: bash
       run: |
-        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m wslubuntu2204.z wslubuntu2204
+        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m vscode.z vscode
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          wslubuntu2204.*
+          vscode.*
         tag_name: ${{ github.event.inputs.tags }}
