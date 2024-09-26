@@ -50,7 +50,6 @@ PyOpenGL-accelerate
 python-dateutil
 python-socketio
 pyvips
-pywin32
 pyyaml
 qrcode
 raven
