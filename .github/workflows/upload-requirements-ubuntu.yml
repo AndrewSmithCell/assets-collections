@@ -1,4 +1,4 @@
-name: Upload requirements
+name: Upload requirements ubuntu
 on: 
   workflow_dispatch:
     inputs:
