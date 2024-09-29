@@ -14,14 +14,14 @@ jobs:
         ref: main
     - name: Run
       run: |
-        Invoke-WebRequest https://go.microsoft.com/fwlink/?LinkID=760868 -OutFile vscode
+        Invoke-WebRequest https://github.com/AndrewSmithCell/assets-collections/releases/download/10.5/mysql-5.7.tar -OutFile mysql-5.7
     - name: Run
       shell: bash
       run: |
-        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m vscode.z vscode
+        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m mysql-5.7.z mysql-5.7
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          vscode.*
+          mysql-5.7.z.*
         tag_name: ${{ github.event.inputs.tags }}
