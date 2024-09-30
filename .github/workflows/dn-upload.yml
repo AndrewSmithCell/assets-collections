@@ -14,7 +14,7 @@ jobs:
         ref: main
     - name: Run
       run: |
-        wget https://releases.ubuntu.com/22.04.6/ubuntu-22.04.6-desktop-amd64.iso -o ubuntu-22.04.6-desktop-amd64.iso
+        Invoke-WebRequest https://releases.ubuntu.com/22.04.6/ubuntu-22.04.6-desktop-amd64.iso -OutFile ubuntu-22.04.6-desktop-amd64.iso
     - name: Run
       shell: bash
       run: |
