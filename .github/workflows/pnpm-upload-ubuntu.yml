@@ -1,0 +1,48 @@
+name: Create pnpm
+on: 
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'tags to create build'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: main
+    - name: Setup node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - name: install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: "9.1.1"
+    - name: pnpm install
+      run: |
+        pnpm init
+        pnpm install sass postcss-cli postcss autoprefixer
+    - name: Archive Release source
+      uses: thedoctor0/zip-release@0.7.5
+      with:
+        type: '7z'
+        filename: 'release.7z'
+        exclusions: node_modules
+    - name: Archive Release packages
+      shell: bash
+      run: |
+        7z a -m0=lzma2 -mx t1.7z ~/.local/share/pnpm/store
+    - name: Archive Release cache
+      shell: bash
+      run: |
+        7z a -m0=lzma2 -mx t2.7z /home/runner/setup-pnpm/node_modules/.bin/pnpm-cache
+    - name: create release and upload assets
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          release.7z
+          t1.7z
+          t2.7z
+        tag_name: ${{ github.event.inputs.tags }}
