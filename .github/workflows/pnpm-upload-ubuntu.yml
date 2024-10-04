@@ -37,7 +37,7 @@ jobs:
     - name: Archive Release cache
       shell: bash
       run: |
-        7z a -m0=lzma2 -mx t2.7z /home/runner/setup-pnpm/node_modules/.bin/pnpm-cache
+        7z a -m0=lzma2 -mx t2.7z ~/.pnpm-cache
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
