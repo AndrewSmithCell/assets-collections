@@ -24,6 +24,7 @@ jobs:
       run: |
         pnpm init
         pnpm install @emotion/react @emotion/styled @mui/icons-material @mui/material @reduxjs/toolkit react react-dom react-redux react-router-dom @types/react @types/node @types/react-dom @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-react @vitejs/plugin-react-swc eslint-config-prettier eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-tailwindcss typescript prettier vite autoprefixer eslint@8.X happy-dom postcss tailwindcss vite-tsconfig-paths vitest codemirror@5.X @types/codemirror@5.X @types/d3 react-helmet react-helmet-async @fortune-sheet/react react-lazyload react-i18next i18next i18next-resources-for-ts marked diff @types/diff diff2html markdown-it @types/markdown-it socket.io-client @types/socket.io-client @types/uuid simplebar @types/simplebar @types/events quill quill-markdown-shortcuts
+        pnpm store path
     - name: Archive Release source
       uses: thedoctor0/zip-release@0.7.5
       with:
