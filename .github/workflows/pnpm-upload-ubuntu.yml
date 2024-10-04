@@ -1,4 +1,4 @@
-name: Create pnpm
+name: Pnpm ubuntu
 on: 
   workflow_dispatch:
     inputs:
