@@ -33,7 +33,7 @@ jobs:
     - name: Archive Release packages
       shell: bash
       run: |
-        7z a -m0=lzma2 -mx t1.7z ~/.local/share/pnpm/store
+        7z a -m0=lzma2 -mx t1.7z /home/runner/setup-pnpm/node_modules/.bin/store/v3
     - name: Archive Release cache
       shell: bash
       run: |
