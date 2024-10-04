@@ -6,7 +6,7 @@ on:
         description: 'tags to create build'
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     permissions: write-all
     steps:
     - uses: actions/checkout@v4
@@ -33,11 +33,11 @@ jobs:
     - name: Archive Release packages
       shell: bash
       run: |
-        "/c/Program Files/7-Zip/7z.exe" a -m0=lzma2 -mx t1.7z "D:\.pnpm-store"
+        7z a -m0=lzma2 -mx t1.7z ~/.local/share/pnpm/store
     - name: Archive Release cache
       shell: bash
       run: |
-        "/c/Program Files/7-Zip/7z.exe" a -m0=lzma2 -mx t2.7z "C:\Users\runneradmin\AppData\Local\pnpm-cache"
+        7z a -m0=lzma2 -mx t2.7z /home/runner/setup-pnpm/node_modules/.bin/pnpm-cache
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
