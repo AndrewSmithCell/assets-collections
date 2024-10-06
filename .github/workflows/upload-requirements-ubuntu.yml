@@ -14,7 +14,7 @@ jobs:
         ref: main
     - uses: actions/setup-python@v5
       with:
-        python-version: '3.10'         
+        python-version: '3.12'         
     - name: Run
       run: |
         pip download -r requirements1.txt
