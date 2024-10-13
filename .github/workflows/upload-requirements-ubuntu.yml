@@ -6,7 +6,7 @@ on:
         description: 'tags to create build'
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     permissions: write-all
     steps:
     - uses: actions/checkout@v4
@@ -17,10 +17,7 @@ jobs:
         python-version: '3.12'         
     - name: Run
       run: |
-        pip download -r requirements1.txt
-        pip download -r requirements2.txt
-        pip download -r requirements3.txt
-        pip download -r requirements5.txt
+        pip download -r requirements7.txt
     - name: Run
       shell: bash
       run: |
