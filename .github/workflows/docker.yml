@@ -14,10 +14,12 @@ jobs:
         ref: main
     - name: Run
       run: |
-        docker pull postgres:16-alpine
-        docker save --output postgres-16.tar postgres:16-alpine
-        docker pull docker.io/bitnami/mysql:5.7
-        docker save --output mysql-5.7.tar docker.io/bitnami/mysql:5.7
+        docker pull dmoj/runtimes-tier1
+        docker save --output dmoj-runtimes-tier1.tar dmoj/runtimes-tier1
+        docker pull dmoj/runtimes-tier2
+        docker save --output dmoj-runtimes-tier2.tar dmoj/runtimes-tier2
+        docker pull dmoj/runtimes-tier3
+        docker save --output dmoj-runtimes-tier3.tar dmoj/runtimes-tier3
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
