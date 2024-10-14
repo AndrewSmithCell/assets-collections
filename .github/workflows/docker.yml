@@ -16,10 +16,6 @@ jobs:
       run: |
         docker pull dmoj/runtimes-tier1
         docker save --output dmoj-runtimes-tier1.tar dmoj/runtimes-tier1
-        docker pull dmoj/runtimes-tier2
-        docker save --output dmoj-runtimes-tier2.tar dmoj/runtimes-tier2
-        docker pull dmoj/runtimes-tier3
-        docker save --output dmoj-runtimes-tier3.tar dmoj/runtimes-tier3
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
