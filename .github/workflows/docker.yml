@@ -14,8 +14,8 @@ jobs:
         ref: main
     - name: Run
       run: |
-        docker pull dmoj/runtimes-tier2
-        docker save --output dmoj-runtimes-tier1.tar dmoj/runtimes-tier2
+        docker pull nginx:alpine
+        docker save --output nginx-alpine.tar nginx:alpine
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
