@@ -14,14 +14,14 @@ jobs:
         ref: main
     - name: Run
       run: |
-        Invoke-WebRequest https://github.com/AndrewSmithCell/assets-collections/releases/download/20.1/dmoj-runtimes-tier1.tar -OutFile dmoj-runtimes-tier1.tar
+        Invoke-WebRequest https://github.com/AndrewSmithCell/assets-collections/releases/download/20.3/node-alpine.tar -OutFile node-alpine
     - name: Run
       shell: bash
       run: |
-        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m dmoj-runtimes-tier1.tar.z dmoj-runtimes-tier1.tar
+        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m node-alpine.z node-alpine
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          dmoj-runtimes-tier1.tar.z.*
+          node-alpine.z.*
         tag_name: ${{ github.event.inputs.tags }}
