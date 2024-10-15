@@ -14,8 +14,8 @@ jobs:
         ref: main
     - name: Run
       run: |
-        docker pull nginx:alpine
-        docker save --output nginx-alpine.tar nginx:alpine
+        docker pull redis:alpine
+        docker save --output redis-alpine.tar redis:alpine
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
