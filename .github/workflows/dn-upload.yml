@@ -14,14 +14,14 @@ jobs:
         ref: main
     - name: Run
       run: |
-        Invoke-WebRequest https://master.dl.sourceforge.net/project/bleachbit/bleachbit/4.6.0/BleachBit-4.6.0-setup.exe?viasf=1 -OutFile BleachBit-4.6.0-setup
+        Invoke-WebRequest https://github.com/comfyanonymous/ComfyUI/releases/download/v0.2.6/ComfyUI_windows_portable_nvidia.7z -OutFile ComfyUI
     - name: Run
       shell: bash
       run: |
-        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m BleachBit-4.6.0-setup.z BleachBit-4.6.0-setup
+        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m ComfyUI.z ComfyUI
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          BleachBit-4.6.0-setup.z.*
+          ComfyUI.z.*
         tag_name: ${{ github.event.inputs.tags }}
