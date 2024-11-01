@@ -23,7 +23,7 @@ jobs:
     - name: pnpm install
       run: |
         pnpm init
-        pnpm install react-activity-calendar
+        pnpm install toolpad-app
     - name: Archive Release source
       uses: thedoctor0/zip-release@0.7.5
       with:
