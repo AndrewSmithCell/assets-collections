@@ -14,14 +14,14 @@ jobs:
         ref: main
     - name: Run
       run: |
-        Invoke-WebRequest https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -OutFile google-chrome-linux
+        Invoke-WebRequest https://github.com/AndrewSmithCell/kubekey/releases/download/6.4/ubuntu-22.04-amd64-debs.z -OutFile ubuntu-22.04-amd64-debs
     - name: Run
       shell: bash
       run: |
-        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m google-chrome-linux.z google-chrome-linux
+        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m ubuntu-22.04-amd64-debs.z ubuntu-22.04-amd64-debs
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          google-chrome-linux.z.*
+          ubuntu-22.04-amd64-debs.z.*
         tag_name: ${{ github.event.inputs.tags }}
