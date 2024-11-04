@@ -22,7 +22,7 @@ jobs:
         version: "9.1.1"
     - name: pnpm install
       run: |
-        pnpm i -g verdaccio@next
+        pnpm i -g verdaccio
         verdaccio & (cd npm-packages-1 && NPM_CONFIG_REGISTRY=http://localhost:4873 npm i)        
     - name: Archive Release packages
       shell: bash
