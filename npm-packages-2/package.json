@@ -20,7 +20,7 @@
     "prettier": "latest",
     "vite": "latest",
     "autoprefixer": "latest",
-    "eslint@8.X": "latest",
+    "eslint": "latest",
     "happy-dom": "latest",
     "postcss": "latest",
     "tailwindcss": "latest",
