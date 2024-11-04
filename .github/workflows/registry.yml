@@ -1,0 +1,36 @@
+name: npm registry
+on: 
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'tags to create build'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: main
+    - name: Setup node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - name: install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: "9.1.1"
+    - name: pnpm install
+      run: |
+        pnpm i -g verdaccio@next
+        verdaccio & (cd npm-packages-1 && NPM_CONFIG_REGISTRY=http://localhost:4873 npm i)        
+    - name: Archive Release packages
+      shell: bash
+      run: |
+        7z a -m0=lzma2 -mx t1.7z ~/.local/share/verdaccio/
+    - name: create release and upload assets
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          t1.7z
+        tag_name: ${{ github.event.inputs.tags }}
