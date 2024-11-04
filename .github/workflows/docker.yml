@@ -14,8 +14,8 @@ jobs:
         ref: main
     - name: Run
       run: |
-        docker pull node:alpine
-        docker save --output node-alpine.tar node:alpine
+        docker pull verdaccio/verdaccio:nightly-master
+        docker save --output verdaccio.tar verdaccio/verdaccio:nightly-master
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
