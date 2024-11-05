@@ -23,7 +23,7 @@ jobs:
     - name: pnpm install
       run: |
         pnpm i -g verdaccio
-        verdaccio & (cd npm-packages-3 && rm -rf node_modules && NPM_CONFIG_REGISTRY=http://localhost:4873 npm i && cd .. && bash ./npm-make-registry.sh)
+        verdaccio & (cd npm-packages-4 && rm -rf node_modules && cd .. && bash ./npm-make-registry.sh)
     - name: Archive Release packages
       shell: bash
       run: |
