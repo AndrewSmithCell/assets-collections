@@ -26,7 +26,7 @@ for (dirpath, dirnames, filenames) in os.walk(packages_dir):
             new_list[g] = sz
             original_list[g] = sz
             
-with open("packages.list", "w", encoding='utf-8') as f:
+with open("npm-packages.list", "w", encoding='utf-8') as f:
     for (g, sz) in original_list.items():
         f.write(f"{g} {sz}\n")
     
