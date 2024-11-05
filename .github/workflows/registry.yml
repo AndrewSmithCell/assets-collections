@@ -23,11 +23,12 @@ jobs:
     - name: pnpm install
       run: |
         pnpm i -g verdaccio
-        verdaccio & (mkdir npm-packages-4 && cd npm-packages-4 && NPM_CONFIG_REGISTRY=http://localhost:4873 npm i verdaccio --force)        
+        verdaccio & (cd npm-packages-3 && NPM_CONFIG_REGISTRY=http://localhost:4873 npm i --force)
+        python npm-registry.py
     - name: Archive Release packages
       shell: bash
       run: |
-        7z a -m0=lzma2 -mx t1.7z ~/.local/share/verdaccio/
+        7z a -m0=lzma2 -mx t1.7z packages/
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
