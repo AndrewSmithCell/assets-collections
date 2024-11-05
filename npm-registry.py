@@ -14,7 +14,7 @@ except Exception as e:
     pass
 
 
-packages_dir = "~/.local/share/verdaccio/"
+packages_dir = "/home/runner/.local/share/verdaccio/"
 
 new_list = {}
 for (dirpath, dirnames, filenames) in os.walk(packages_dir):
@@ -22,6 +22,7 @@ for (dirpath, dirnames, filenames) in os.walk(packages_dir):
         relpath = os.path.relpath(dirpath, packages_dir)
         g = os.path.join(relpath, f)
         sz = os.path.getsize(os.path.join(packages_dir, g))
+        print(g, sz)
         if not (g in original_list) or (str(original_list[g]) != str(sz)):
             new_list[g] = sz
             original_list[g] = sz
