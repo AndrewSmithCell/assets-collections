@@ -23,7 +23,7 @@ jobs:
     - name: pnpm install
       run: |
         pnpm i -g verdaccio
-        verdaccio & (cd npm-packages-4 && rm -rf node_modules && cd .. && bash ./npm-make-registry.sh)
+        verdaccio & (mkdir npm-packages-4 && cd npm-packages-4 && bash ../npm-install.sh && cd .. && bash ./npm-make-registry.sh)
     - name: Archive Release packages
       shell: bash
       run: |
