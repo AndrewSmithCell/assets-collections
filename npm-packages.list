@@ -4397,3 +4397,13 @@ storage/@rollup/rollup-freebsd-arm64/package.json 9509
 storage/@rollup/rollup-freebsd-arm64/rollup-freebsd-arm64-4.24.4.tgz 934455
 storage/@rollup/rollup-win32-x64-msvc/package.json 221678
 storage/@rollup/rollup-win32-x64-msvc/rollup-win32-x64-msvc-4.24.4.tgz 1183421
+storage/mathoid/package.json 104594
+storage/mathoid/mathoid-0.7.6.tgz 136937
+storage/ws/package.json 513411
+storage/ws/ws-8.18.0.tgz 34017
+storage/postcss-cli/package.json 179095
+storage/postcss-cli/postcss-cli-11.0.0.tgz 7386
+storage/simplesets/package.json 20334
+storage/simplesets/simplesets-1.2.0.tgz 5019
+storage/qu/package.json 5242
+storage/qu/qu-0.1.0.tgz 3032
