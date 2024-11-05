@@ -2829,3 +2829,13 @@ storage\zip-stream\package.json 138237
 storage\zip-stream\zip-stream-4.1.1.tgz 4826
 storage\zustand\package.json 592582
 storage\zustand\zustand-3.7.2.tgz 36581
+storage/.verdaccio-db.json 55
+storage/quill/package.json 392038
+storage/@swc/core-linux-x64-musl/package.json 1595626
+storage/@swc/core-linux-x64-musl/core-linux-x64-musl-1.8.0.tgz 20735833
+storage/axios/package.json 703807
+storage/@parcel/watcher-linux-x64-musl/package.json 29985
+storage/@parcel/watcher-linux-x64-musl/watcher-linux-x64-musl-2.5.0.tgz 193123
+storage/react-quill/package.json 207341
+storage/@rollup/rollup-linux-x64-musl/package.json 222217
+storage/@rollup/rollup-linux-x64-musl/rollup-linux-x64-musl-4.24.4.tgz 1051894
