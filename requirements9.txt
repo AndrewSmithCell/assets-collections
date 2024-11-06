@@ -1,7 +1,6 @@
 pypiserver
 pymysql
 mysqlclient
-uwsgi
 websocket-client
 django-recaptcha2
 django-redis
