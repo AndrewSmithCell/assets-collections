@@ -23,6 +23,8 @@ jobs:
     - name: pnpm install
       run: |
         pnpm i -g verdaccio
+        git config user.name github-actions
+        git config user.email github-actions@github.com
         verdaccio & (cd npm-packages-3 && git rm -r --cached node_modules && git commit -m "Removed folder from repository" && git push origin main && bash ../npm-install.sh && cd .. && bash ./npm-make-registry.sh)
     - name: Archive Release packages
       shell: bash
