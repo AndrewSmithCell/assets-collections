@@ -1,3 +1,4 @@
+pypiserver
 pymysql
 mysqlclient
 uwsgi
