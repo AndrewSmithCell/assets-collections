@@ -17,14 +17,14 @@ jobs:
         python-version: '3.10'         
     - name: Run
       run: |
-        pip download -r requirements8.txt
+        pip download -r requirements9.txt
     - name: Run
       shell: bash
       run: |
-        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v20m x.tar.gz .
+        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v20m x-9.tar.gz .
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          x.tar.gz.*
+          x-9.tar.gz.*
         tag_name: ${{ github.event.inputs.tags }}
