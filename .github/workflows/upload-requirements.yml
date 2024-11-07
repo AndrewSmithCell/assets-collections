@@ -17,7 +17,7 @@ jobs:
         python-version: '3.10'         
     - name: Run
       run: |
-        pip download -r requirements9.txt
+        pip download -r requirements10.txt
     - name: Run
       shell: bash
       run: |
