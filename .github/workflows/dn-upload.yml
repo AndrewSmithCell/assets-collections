@@ -14,7 +14,7 @@ jobs:
         ref: main
     - name: Run
       run: |
-        Invoke-WebRequest Invoke-WebRequest https://update.code.visualstudio.com/latest/win32-x64/stable -OutFile vscode -OutFile vscode
+        Invoke-WebRequest https://update.code.visualstudio.com/latest/win32-x64/stable -OutFile vscode
     - name: Run
       shell: bash
       run: |
