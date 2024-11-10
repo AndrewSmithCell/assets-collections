@@ -14,14 +14,14 @@ jobs:
         ref: main
     - name: Run
       run: |
-        Invoke-WebRequest https://update.code.visualstudio.com/latest/win32-x64/stable -OutFile vscode
+        Invoke-WebRequest https://github.com/Cyfrin/Updraft/archive/refs/heads/main.zip -OutFile main
     - name: Run
       shell: bash
       run: |
-        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m vscode.z vscode
+        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m main.z main
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          vscode.z.*
+          main.z.*
         tag_name: ${{ github.event.inputs.tags }}
