@@ -12,10 +12,10 @@ jobs:
     - name: install ollama
       run: curl -fsSL https://ollama.com/install.sh | sh
     - name: load model
-      run: ollama pull llama3.1
+      run: ollama pull llama3.2
     - uses: actions/checkout@v3
     - run: |
-        sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v20m x.tar.gz /usr/share/ollama
+        sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m x.tar.gz /usr/share/ollama
     - name: List files
       run: |
           ls -a
