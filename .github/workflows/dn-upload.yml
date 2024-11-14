@@ -14,7 +14,7 @@ jobs:
         ref: main
     - name: Run
       run: |
-        Invoke-WebRequest https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe -OutFile xampp-windows-x64-8.2.12-0-VS16-installer
+        Invoke-WebRequest -UserAgent "Wget" https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe -OutFile xampp-windows-x64-8.2.12-0-VS16-installer
     - name: Run
       shell: bash
       run: |
