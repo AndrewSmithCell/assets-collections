@@ -14,14 +14,14 @@ jobs:
         ref: main
     - name: Run
       run: |
-        Invoke-WebRequest https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.39-winx64.zip -OutFile mysql-8.0.39
+        Invoke-WebRequest https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe -OutFile xampp-windows-x64-8.2.12-0-VS16-installer
     - name: Run
       shell: bash
       run: |
-        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m mysql-8.0.39.z mysql-8.0.39
+        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m xampp-windows-x64-8.2.12-0-VS16-installer.z xampp-windows-x64-8.2.12-0-VS16-installer
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          mysql-8.0.39.z.*
+          xampp-windows-x64-8.2.12-0-VS16-installer.z.*
         tag_name: ${{ github.event.inputs.tags }}
