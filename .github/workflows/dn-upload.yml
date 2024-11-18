@@ -14,7 +14,7 @@ jobs:
         ref: main
     - name: Run
       run: |
-        Invoke-WebRequest -UserAgent "Wget" https://modelscope.cn/api/v1/models/AI-ModelScope/stable-diffusion-v1-5/repo?Revision=master&FilePath=v1-5-pruned-emaonly.safetensors -OutFile sd1.5
+        Invoke-WebRequest -UserAgent "Wget" "https://modelscope.cn/api/v1/models/AI-ModelScope/stable-diffusion-v1-5/repo?Revision=master&FilePath=v1-5-pruned-emaonly.safetensors" -OutFile sd1.5
     - name: Run
       shell: bash
       run: |
