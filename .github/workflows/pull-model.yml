@@ -10,7 +10,9 @@ jobs:
     permissions: write-all
     steps:
     - name: install ollama
-      run: curl -fsSL https://ollama.com/install.sh | sh
+      run: |
+        curl -L https://ollama.com/download/ollama-linux-amd64.tgz -o ollama-linux-amd64.tgz
+        sudo tar -C /usr -xzf ollama-linux-amd64.tgz
     - name: load model
       run: ollama pull qwen2.5-coder:7b-instruct
     - uses: actions/checkout@v3
