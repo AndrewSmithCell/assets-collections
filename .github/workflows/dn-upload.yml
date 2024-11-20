@@ -14,14 +14,14 @@ jobs:
         ref: main
     - name: Run
       run: |
-        Invoke-WebRequest -UserAgent "Wget" "https://modelscope.cn/api/v1/models/AI-ModelScope/stable-diffusion-v1-5/repo?Revision=master&FilePath=v1-5-pruned-emaonly.safetensors" -OutFile sd1.5
+        Invoke-WebRequest -UserAgent "Wget" "https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe" -OutFile docker-desktop-installer
     - name: Run
       shell: bash
       run: |
-        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m sd1.5.z sd1.5
+        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m docker-desktop-installer.z docker-desktop-installer
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          sd1.5.z.*
+          docker-desktop-installer.z.*
         tag_name: ${{ github.event.inputs.tags }}
