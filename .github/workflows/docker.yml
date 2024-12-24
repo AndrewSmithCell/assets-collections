@@ -15,10 +15,11 @@ jobs:
     - name: Run
       run: |
         docker pull verdaccio/verdaccio:nightly-master
-        docker save --output verdaccio.tar verdaccio/verdaccio:nightly-master
+        docker save --output docker-doc.tar docs/docker.github.io:latest
+        7z a -m0=lzma2 -mx docker-doc.7z docker-doc.tar
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          *.tar
+          docker-doc.7z
         tag_name: ${{ github.event.inputs.tags }}
