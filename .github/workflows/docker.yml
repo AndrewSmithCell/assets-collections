@@ -14,7 +14,7 @@ jobs:
         ref: main
     - name: Run
       run: |
-        docker pull verdaccio/verdaccio:nightly-master
+        docker pull docs/docker.github.io:latest
         docker save --output docker-doc.tar docs/docker.github.io:latest
         7z a -m0=lzma2 -mx docker-doc.7z docker-doc.tar
     - name: create release and upload assets
