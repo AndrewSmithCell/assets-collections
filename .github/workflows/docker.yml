@@ -14,12 +14,12 @@ jobs:
         ref: main
     - name: Run
       run: |
-        docker pull docs/docker.github.io:latest
-        docker save --output docker-doc.tar docs/docker.github.io:latest
-        7z a -t7z -mx -m0=LZMA2 -v40m docker-doc.7z docker-doc.tar
+        docker pull gitea/act_runner:latest
+        docker save --output gitea-act-runner.tar gitea/act_runner:latest
+        7z a -t7z -mx -m0=LZMA2 -v40m gitea-act-runner.7z gitea-act-runner.tar
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          docker-doc.7z*
+          gitea-act-runner.7z*
         tag_name: ${{ github.event.inputs.tags }}
