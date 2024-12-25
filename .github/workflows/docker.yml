@@ -16,7 +16,7 @@ jobs:
       run: |
         docker pull node:10.21.0
         docker save --output node-10.21.0.tar node:10.21.0
-        7z a -m0=lzma2 -mx node-10.21.0.7z node-10.21.0.tar
+        7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m node-10.21.0.7z node-10.21.0.tar
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
