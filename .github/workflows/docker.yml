@@ -16,7 +16,7 @@ jobs:
       run: |
         docker pull docs/docker.github.io:latest
         docker save --output docker-doc.tar docs/docker.github.io:latest
-        7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m docker-doc.7z docker-doc.tar
+        7z a -t7z -mx -m0=LZMA2 -v40m docker-doc.7z docker-doc.tar
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
