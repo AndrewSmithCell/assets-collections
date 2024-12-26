@@ -14,8 +14,8 @@ jobs:
         ref: main
     - name: Run
       run: |
-        docker save dmoj/runtimes-tier2:latest | bzip2 > dmoj-judge-tier2.bz
-        7z a -t7z -mx -m0=LZMA2 -v40m dmoj-judge-tier2.7z dmoj-judge-tier2.tz
+        docker save dmoj/runtimes-tier2:latest | gzip > dmoj-judge-tier2.gz
+        7z a -t7z -mx -m0=LZMA2 -v40m dmoj-judge-tier2.7z dmoj-judge-tier2.gz
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
