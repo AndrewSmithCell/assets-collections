@@ -14,14 +14,14 @@ jobs:
         ref: main
     - name: Run
       run: |
-        Invoke-WebRequest -UserAgent "Wget" "https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe" -OutFile docker-desktop-installer
+        Invoke-WebRequest -UserAgent "Wget" "https://github.com/AndrewSmithCell/ubuntu-repository/releases/download/1.2/packages-20241226044048.tar.gz" -OutFile packages-20241226044048.tar.gz
     - name: Run
       shell: bash
       run: |
-        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m docker-desktop-installer.z docker-desktop-installer
+        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m packages-20241226044048.z packages-20241226044048.tar.gz
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          docker-desktop-installer.z.*
+          packages-20241226044048.z.*
         tag_name: ${{ github.event.inputs.tags }}
