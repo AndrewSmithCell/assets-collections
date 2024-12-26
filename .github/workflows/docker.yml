@@ -14,12 +14,12 @@ jobs:
         ref: main
     - name: Run
       run: |
-        docker pull ghcr.io/dmoj/runtimes-tier2:amd64-latest
-        docker save ghcr.io/dmoj/runtimes-tier2:amd64-latest | gzip > dmoj-judge-tier2.gz
-        7z a -t7z -mx -m0=LZMA2 -v40m dmoj-judge-tier2.7z dmoj-judge-tier2.gz
+        docker pull vnoj/judge-tiervnoj
+        docker save vnoj/judge-tiervnoj | gzip > vnoj-tiervnoj.gz
+        7z a -t7z -mx -m0=LZMA2 -v40m vnoj-tiervnoj.7z vnoj-tiervnoj.gz
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          dmoj-judge-tier2.7z*
+          vnoj-tiervnoj.7z*
         tag_name: ${{ github.event.inputs.tags }}
