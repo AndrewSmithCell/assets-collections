@@ -15,11 +15,11 @@ jobs:
     - name: Run
       run: |
         docker pull gitea/act_runner:latest
-        docker save --output gitea-act-runner.tar gitea/act_runner:latest
-        7z a -t7z -mx -m0=LZMA2 -v40m gitea-act-runner.7z gitea-act-runner.tar
+        docker save --output dmoj-judge-tier3.tar dmoj/judge-tier3:latest
+        7z a -t7z -mx -m0=LZMA2 -v40m dmoj-judge-tier3.7z dmoj-judge-tier3.tar
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          gitea-act-runner.7z*
+          dmoj-judge-tier3.7z*
         tag_name: ${{ github.event.inputs.tags }}
