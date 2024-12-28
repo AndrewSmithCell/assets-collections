@@ -14,12 +14,12 @@ jobs:
         ref: main
     - name: Run
       run: |
-        docker pull vnoj/judge-tiervnoj
-        docker save vnoj/judge-tiervnoj | gzip > vnoj-tiervnoj.gz
-        7z a -t7z -mx -m0=LZMA2 -v40m vnoj-tiervnoj.7z vnoj-tiervnoj.gz
+        docker pull ubuntu:22.04
+        docker save ubuntu:22.04 | gzip > ubuntu-22.04.gz
+        7z a -t7z -mx -m0=LZMA2 -v40m ubuntu-22.04.7z ubuntu-22.04.gz
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          vnoj-tiervnoj.7z*
+          ubuntu-22.04.7z*
         tag_name: ${{ github.event.inputs.tags }}
