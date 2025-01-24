@@ -16,7 +16,6 @@ jobs:
       run: |
         pip3 install huggingface_hub
         python3 mineru-download.py
-    - uses: actions/checkout@v3
     - run: |
         sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m mineru.tar.gz files
     - name: create release and upload assets
