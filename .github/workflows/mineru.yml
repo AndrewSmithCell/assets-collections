@@ -1,0 +1,27 @@
+name: pull-ollama-llm
+on: 
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'tags to create build'
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: main    
+    - name: download model
+      run: |
+        pip3 install huggingface_hub
+        python3 mineru-download.py
+    - uses: actions/checkout@v3
+    - run: |
+        sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m mineru.tar.gz files
+    - name: create release and upload assets
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          x.tar.gz.*
+        tag_name: ${{ github.event.inputs.tags }}
