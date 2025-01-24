@@ -1,4 +1,4 @@
-name: pull-ollama-llm
+name: mineru
 on: 
   workflow_dispatch:
     inputs:
