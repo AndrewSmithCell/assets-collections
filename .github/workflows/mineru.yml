@@ -22,5 +22,5 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          x.tar.gz.*
+          mineru.tar.gz.*
         tag_name: ${{ github.event.inputs.tags }}
