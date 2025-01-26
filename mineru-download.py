@@ -48,8 +48,5 @@ if __name__ == '__main__':
         "*.safetensors",
     ]
     layoutreader_model_dir = snapshot_download('hantian/layoutreader', allow_patterns=layoutreader_pattern, local_dir=home_dir, local_dir_use_symlinks=False,)
-
-    model_dir = model_dir + '/models'
-    print(f'model_dir is: {model_dir}')
     print(f'layoutreader_model_dir is: {layoutreader_model_dir}')
 
