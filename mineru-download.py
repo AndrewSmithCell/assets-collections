@@ -43,26 +43,13 @@ if __name__ == '__main__':
     home_dir = 'files'
     os.makedirs(home_dir)
 
-    model_dir = snapshot_download('opendatalab/PDF-Extract-Kit-1.0', allow_patterns=mineru_patterns, local_dir=home_dir, local_dir_use_symlinks=False,)
-
     layoutreader_pattern = [
         "*.json",
         "*.safetensors",
     ]
-    layoutreader_model_dir = snapshot_download('hantian/layoutreader', allow_patterns=layoutreader_pattern)
+    layoutreader_model_dir = snapshot_download('hantian/layoutreader', allow_patterns=layoutreader_pattern, local_dir=home_dir, local_dir_use_symlinks=False,)
 
     model_dir = model_dir + '/models'
     print(f'model_dir is: {model_dir}')
     print(f'layoutreader_model_dir is: {layoutreader_model_dir}')
 
-    json_url = 'https://github.com/opendatalab/MinerU/raw/master/magic-pdf.template.json'
-    config_file_name = 'magic-pdf.json'
-    config_file = os.path.join(home_dir, config_file_name)
-
-    json_mods = {
-        'models-dir': model_dir,
-        'layoutreader-model-dir': layoutreader_model_dir,
-    }
-
-    download_and_modify_json(json_url, config_file, json_mods)
-    print(f'The configuration file has been configured successfully, the path is: {config_file}')
