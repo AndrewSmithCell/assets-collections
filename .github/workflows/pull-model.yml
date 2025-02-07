@@ -16,10 +16,6 @@ jobs:
         python ollama-dl.py deepseek-r1:14b -d models
     - run: |
         sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m x.tar.gz models
-    - name: List files
-      run: |
-          ls -a
-          ls -R /usr/share/ollama
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
