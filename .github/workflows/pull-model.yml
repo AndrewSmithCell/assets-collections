@@ -14,10 +14,10 @@ jobs:
         curl -L https://ollama.com/download/ollama-linux-amd64.tgz -o ollama-linux-amd64.tgz
         sudo tar -C /usr -xzf ollama-linux-amd64.tgz
     - name: load model
-      run: ollama serve & ollama pull qwen2.5-coder:7b-instruct
+      run: ollama serve & ollama pull deepseek-r1:14b
     - uses: actions/checkout@v3
     - run: |
-        sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m x.tar.gz /usr/share/ollama/.ollama
+        sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m x.tar.gz /usr/share/ollama/.ollama/models
     - name: List files
       run: |
           ls -a
