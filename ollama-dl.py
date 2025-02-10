@@ -162,7 +162,7 @@ async def get_download_jobs_for_image(
     )
     layer = manifest_data["config"]
     filename = file_template.format(shorthash=get_short_hash(layer))
-    dest_path = pathlib.Path(dest_dir) / "models" / filename
+    dest_path = pathlib.Path(dest_dir) / "blobs" / filename
     yield DownloadJob(
         layer=layer,
         dest_path=dest_path,
@@ -178,7 +178,7 @@ async def get_download_jobs_for_image(
             )
             continue
         filename = file_template.format(shorthash=get_short_hash(layer))
-        dest_path = pathlib.Path(dest_dir) / "models" / filename
+        dest_path = pathlib.Path(dest_dir) / "blobs" / filename
         yield DownloadJob(
             layer=layer,
             dest_path=dest_path,
