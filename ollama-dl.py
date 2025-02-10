@@ -18,18 +18,18 @@ DOWNLOAD_READ_SIZE = BYTES_IN_MEGABYTE
 log = logging.getLogger("ollama-dl")
 
 media_type_to_file_template = {
-    "application/vnd.ollama.image.license": "license-{shorthash}.txt",
-    "application/vnd.ollama.image.model": "model-{shorthash}.gguf",
-    "application/vnd.ollama.image.params": "params-{shorthash}.json",
-    "application/vnd.ollama.image.system": "system-{shorthash}.txt",
-    "application/vnd.ollama.image.template": "template-{shorthash}.txt",
+    "application/vnd.ollama.image.license": "{shorthash}",
+    "application/vnd.ollama.image.model": "{shorthash}",
+    "application/vnd.ollama.image.params": "{shorthash}",
+    "application/vnd.ollama.image.system": "{shorthash}",
+    "application/vnd.ollama.image.template": "{shorthash}",
 }
 
 
 def get_short_hash(layer: dict) -> str:
     if not layer["digest"].startswith("sha256:"):
         raise ValueError(f"Unexpected digest: {layer['digest']}")
-    return layer["digest"].partition(":")[2][:12]
+    return layer["digest"].replace(":", "-")
 
 
 def format_size(size: int) -> str:
@@ -154,6 +154,21 @@ async def get_download_jobs_for_image(
         raise ValueError(
             f"Unexpected media type for manifest: {manifest_media_type}",
         )
+    yield DownloadJob(
+        layer={},
+        dest_path=pathlib.Path(desk_dir) / "manifests" / name / version,
+        blob_url=manifest_url,
+        size=100,
+    )
+    layer = manifest_data["config"]
+    filename = file_template.format(shorthash=get_short_hash(layer))
+    dest_path = pathlib.Path(dest_dir) / "models" / filename
+    yield DownloadJob(
+        layer=layer,
+        dest_path=dest_path,
+        blob_url=urljoin(registry, f"v2/{name}/blobs/{layer['digest']}"),
+        size=layer["size"],
+    )
     for layer in sorted(manifest_data["layers"], key=lambda x: x["size"]):
         file_template = media_type_to_file_template.get(layer["mediaType"])
         if not file_template:
@@ -163,7 +178,7 @@ async def get_download_jobs_for_image(
             )
             continue
         filename = file_template.format(shorthash=get_short_hash(layer))
-        dest_path = pathlib.Path(dest_dir) / filename
+        dest_path = pathlib.Path(dest_dir) / "models" / filename
         yield DownloadJob(
             layer=layer,
             dest_path=dest_path,
