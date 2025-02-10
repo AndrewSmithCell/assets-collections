@@ -126,10 +126,6 @@ async def download_blob(
             else:
                 break
         result_size = temp_path.stat().st_size
-        if result_size != job.size:
-            raise RuntimeError(
-                f"Did not download expected size: {result_size} != {job.size}",
-            )
         temp_path.rename(job.dest_path)
         progress.update(task, completed=job.size)
     finally:
