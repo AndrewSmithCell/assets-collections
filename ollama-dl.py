@@ -161,7 +161,7 @@ async def get_download_jobs_for_image(
         size=100,
     )
     layer = manifest_data["config"]
-    filename = file_template.format(shorthash=get_short_hash(layer))
+    filename = get_short_hash(layer)
     dest_path = pathlib.Path(dest_dir) / "blobs" / filename
     yield DownloadJob(
         layer=layer,
@@ -170,14 +170,7 @@ async def get_download_jobs_for_image(
         size=layer["size"],
     )
     for layer in sorted(manifest_data["layers"], key=lambda x: x["size"]):
-        file_template = media_type_to_file_template.get(layer["mediaType"])
-        if not file_template:
-            log.warning(
-                "Ignoring layer with unknown media type: %s",
-                layer["mediaType"],
-            )
-            continue
-        filename = file_template.format(shorthash=get_short_hash(layer))
+        filename = get_short_hash(layer)
         dest_path = pathlib.Path(dest_dir) / "blobs" / filename
         yield DownloadJob(
             layer=layer,
