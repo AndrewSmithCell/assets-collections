@@ -1,31 +1,5 @@
 $extensions = @(
-    "cweijan.vscode-autohotkey-plus";
-    "stylelint.vscode-stylelint";
-    "Zignd.html-css-class-completion";
-    "golang.Go";
-    "VisualStudioExptTeam.vscodeintellicode";
-    "ipatalas.vscode-postfix-ts";
-    "dbaeumer.vscode-eslint";
-    "octref.vetur";
-    "onecentlin.laravel5-snippets";
-    "onecentlin.laravel-blade";
-    "ms-python.python";
-    "ms-python.vscode-pylance";
-    "ms-python.debugpy";
-    "dsznajder.es7-react-js-snippets";
-    "rubbersheep.gi";
-    "eamodio.gitlens";
-    "christian-kohler.npm-intellisense";
-    "ms-vscode-remote.vscode-remote-extensionpack";
-    "cssho.vscode-svgviewer";
-    "Vue.volar";
-    "Vue.vscode-typescript-vue-plugin";
-    "lokalise.i18n-ally";
-    "yoavbls.pretty-ts-errors";
-    "ms-python.pylint";
-    "ms-python.black-formatter";
-    "ms-python.autopep8";
-    "charliermarsh.ruff";
+    "ms-vscode.cpptools";
 )
 $body=@{
     filters = ,@{
