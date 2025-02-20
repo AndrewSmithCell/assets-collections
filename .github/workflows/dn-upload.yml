@@ -14,14 +14,14 @@ jobs:
         ref: main
     - name: Run
       run: |
-        Invoke-WebRequest -UserAgent "Wget" "https://github.com/AndrewSmithCell/ubuntu-repository/releases/download/1.2/packages-20241226044048.tar.gz" -OutFile packages-20241226044048.tar.gz
+        Invoke-WebRequest -UserAgent "Wget" "https://github.com/ollama/ollama/releases/download/v0.5.12-rc1/OllamaSetup.exe" -OutFile ollama0.5.12.tar.gz
     - name: Run
       shell: bash
       run: |
-        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m packages-20241226044048.z packages-20241226044048.tar.gz
+        "/c/Program Files/7-Zip/7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m ollama0.5.12.z ollama0.5.12.tar.gz
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          packages-20241226044048.z.*
+          ollama0.5.12.z.*
         tag_name: ${{ github.event.inputs.tags }}
