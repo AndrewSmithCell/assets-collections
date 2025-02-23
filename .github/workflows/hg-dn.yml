@@ -23,5 +23,5 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          *.z.*
+          files-*
         tag_name: ${{ github.event.inputs.tags }}
