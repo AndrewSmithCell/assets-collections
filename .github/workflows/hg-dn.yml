@@ -15,7 +15,7 @@ jobs:
     - name: download model
       run: |
         pip3 install huggingface_hub
-        python3 mineru-download.py
+        python3 huggingface-dn.py
     - run: |
         date=$(date '+%Y%m%d%H%M%S')
         sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m files-$date.tar.gz files
