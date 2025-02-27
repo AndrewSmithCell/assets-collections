@@ -16,7 +16,7 @@ jobs:
         ref: main
     - name: Run
       run: |
-        $outputFile = Split-Path $outputPath -leaf
+        $outputFile = Split-Path ${{ github.event.inputs.url }}  -leaf
         Invoke-WebRequest -UserAgent "Wget" ${{ github.event.inputs.url }} -OutFile $outputFile
         $outputz = $outputFile + ".z"
         & "C:\Program Files\7-Zip\7z.exe" a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m $outputz $outputFile
