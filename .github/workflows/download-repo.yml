@@ -1,0 +1,31 @@
+name: repo dn
+on: 
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'tags to create build'
+      repo:
+        description: 'repo to dn'
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: main    
+    - uses: actions/checkout@v3
+      with:
+        repository: ${{ github.event.inputs.repo }}
+        path: repo
+        submodules: recursive
+        token: ${{ secrets.GITHUB_AUTH_TOKEN }}
+    - run: |
+        date=$(date '+%Y%m%d%H%M%S')
+        sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m files-$date.tar.gz repo
+    - name: create release and upload assets
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          files-*
+        tag_name: ${{ github.event.inputs.tags }}
