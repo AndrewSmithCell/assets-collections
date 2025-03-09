@@ -13,14 +13,14 @@ jobs:
     - name: download
       run: |
         pip install httpx rich
-        python ollama-dl.py qwen2.5-coder:1.5b-base -d models
+        python ollama-dl.py deepseek-r1:7b -d models
     - run: |
-        sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m qwen2.5-coder-1.5b-base.tar.gz models
+        sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m deepseek-r1-7b.tar.gz models
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          qwen2.5-coder-1.5b-base.tar.gz.*
+          deepseek-r1-7b.tar.gz.*
         tag_name: ${{ github.event.inputs.tags }}
       
 
