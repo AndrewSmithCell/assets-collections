@@ -14,8 +14,8 @@ jobs:
         ref: main    
     - name: download model
       run: |
-        pip3 install huggingface_hub
-        python3 huggingface-dn.py
+        pip3 install huggingface_hub datasets
+        python3 hg-datase-dn.py
     - run: |
         date=$(date '+%Y%m%d%H%M%S')
         sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m files-$date.tar.gz files
