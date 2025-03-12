@@ -14,12 +14,12 @@ jobs:
         ref: main
     - name: Run
       run: |
-        docker pull ghcr.io/open-webui/open-webui:git-1dfb479
-        docker save ghcr.io/open-webui/open-webui:git-1dfb479 | gzip > open-webui.gz
-        7z a -t7z -mx -m0=LZMA2 -v40m open-webui.7z open-webui.gz
+        docker pull ubuntu:jammy
+        docker save ubuntu:jammy | gzip > ubuntu.gz
+        7z a -t7z -mx -m0=LZMA2 -v40m ubuntu.7z ubuntu.gz
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          open-webui.7z*
+          ubuntu.7z*
         tag_name: ${{ github.event.inputs.tags }}
