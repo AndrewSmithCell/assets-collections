@@ -16,7 +16,7 @@ jobs:
       run: |
         docker pull penpotapp/exporter
         docker save penpotapp/exporter | gzip > penpotapp-exporter.gz
-        7z a -t7z -mx -m0=LZMA2 -v40m penpotapp-backend.7z penpotapp-exporter.gz
+        7z a -t7z -mx -m0=LZMA2 -v40m penpotapp-exporter.7z penpotapp-exporter.gz
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
