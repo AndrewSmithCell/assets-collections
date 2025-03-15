@@ -14,12 +14,12 @@ jobs:
         ref: main
     - name: Run
       run: |
-        docker pull penpotapp/backend
-        docker save penpotapp/backend | gzip > penpotapp-backend.gz
-        7z a -t7z -mx -m0=LZMA2 -v40m penpotapp-backend.7z penpotapp-backend.gz
+        docker pull penpotapp/exporter
+        docker save penpotapp/exporter | gzip > penpotapp-exporter.gz
+        7z a -t7z -mx -m0=LZMA2 -v40m penpotapp-backend.7z penpotapp-exporter.gz
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          penpotapp-backend.7z*
+          penpotapp-exporter.7z*
         tag_name: ${{ github.event.inputs.tags }}
