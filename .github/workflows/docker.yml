@@ -14,12 +14,12 @@ jobs:
         ref: main
     - name: Run
       run: |
-        docker pull penpotapp/exporter
-        docker save penpotapp/exporter | gzip > penpotapp-exporter.gz
-        7z a -t7z -mx -m0=LZMA2 -v40m penpotapp-exporter.7z penpotapp-exporter.gz
+        docker pull postgres:15
+        docker save postgres:15 | gzip > postgres-15.gz
+        7z a -t7z -mx -m0=LZMA2 -v40m postgres-15.7z postgres-15.gz
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          penpotapp-exporter.7z*
+          postgres-15.7z*
         tag_name: ${{ github.event.inputs.tags }}
