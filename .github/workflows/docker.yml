@@ -14,12 +14,12 @@ jobs:
         ref: main
     - name: Run
       run: |
-        docker pull typesense/typesense:28.0
-        docker save typesense/typesense:28.0 | gzip > typesense-28.gz
-        7z a -t7z -mx -m0=LZMA2 -v40m typesense-28.7z typesense-28.gz
+        docker pull typesense/docsearch-scraper:0.11.0
+        docker save typesense/docsearch-scraper:0.11.0 | gzip > typesense-docsearch-scraper-0.11.0.gz
+        7z a -t7z -mx -m0=LZMA2 -v40m typesense-docsearch-scraper-0.11.0.7z typesense-docsearch-scraper-0.11.0.gz
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          typesense-28.7z*
+          typesense-docsearch-scraper-0.11.0.7z*
         tag_name: ${{ github.event.inputs.tags }}
