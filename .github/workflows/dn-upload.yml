@@ -16,8 +16,8 @@ jobs:
         ref: main
     - name: Run
       run: |
-        .\fido.ps1 -Win 11 -GetUrl
-        $removedQuery = "${{ github.event.inputs.url }}".split("?")[0]
+        $url = .\fido.ps1 -Win 11 -GetUrl
+        $removedQuery = "$url".split("?")[0]
         $outputFile = Split-Path $removedQuery -leaf
         Invoke-WebRequest -UserAgent "Wget" ${{ github.event.inputs.url }} -OutFile $outputFile
         $outputz = $outputFile + ".z"
