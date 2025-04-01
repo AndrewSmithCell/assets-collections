@@ -16,7 +16,7 @@ jobs:
         ref: main
     - name: Run
       run: |
-        $url = .\fido.ps1 -Win 11 -GetUrl
+        $url = .\fido.ps1 -Win 10 -GetUrl
         $removedQuery = "$url".split("?")[0]
         $outputFile = Split-Path $removedQuery -leaf
         Invoke-WebRequest -UserAgent "Wget" $url -OutFile $outputFile
