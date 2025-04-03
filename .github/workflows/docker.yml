@@ -15,7 +15,7 @@ jobs:
     - name: Run
       run: |
         docker pull ghcr.io/matatonic/openedai-speech:latest
-        docker save openedai-speech | gzip > openedai-speech.gz
+        docker save ghcr.io/matatonic/openedai-speech:latest | gzip > openedai-speech.gz
         7z a -t7z -mx -m0=LZMA2 -v40m openedai-speech.7z openedai-speech.gz
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
