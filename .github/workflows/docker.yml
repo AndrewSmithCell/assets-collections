@@ -14,12 +14,12 @@ jobs:
         ref: main
     - name: Run
       run: |
-        docker pull typesense/docsearch-scraper:0.11.0
-        docker save typesense/docsearch-scraper:0.11.0 | gzip > typesense-docsearch-scraper-0.11.0.gz
-        7z a -t7z -mx -m0=LZMA2 -v40m typesense-docsearch-scraper-0.11.0.7z typesense-docsearch-scraper-0.11.0.gz
+        docker pull ghcr.io/matatonic/openedai-speech:latest
+        docker save openedai-speech | gzip > openedai-speech.gz
+        7z a -t7z -mx -m0=LZMA2 -v40m openedai-speech.7z openedai-speech.gz
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          typesense-docsearch-scraper-0.11.0.7z*
+          openedai-speech.7z*
         tag_name: ${{ github.event.inputs.tags }}
