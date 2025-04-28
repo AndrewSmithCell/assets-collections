@@ -4,6 +4,8 @@ on:
     inputs:
       tags:
         description: 'tags to create build'
+      image:
+        description: 'image to download'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,12 +16,13 @@ jobs:
         ref: main
     - name: Run
       run: |
-        docker pull ghcr.io/matatonic/openedai-speech:latest
-        docker save ghcr.io/matatonic/openedai-speech:latest | gzip > openedai-speech.gz
-        7z a -t7z -mx -m0=LZMA2 -v40m openedai-speech.7z openedai-speech.gz
+        $name = $(basename ${{ github.event.inputs.image }})
+        docker pull ${{ github.event.inputs.image }} 
+        docker save ${{ github.event.inputs.image }} | gzip > $name.gz
+        7z a -t7z -mx -m0=LZMA2 -v40m $name.7z $name.gz
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          openedai-speech.7z*
+          *.7z*
         tag_name: ${{ github.event.inputs.tags }}
