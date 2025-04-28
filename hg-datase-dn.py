@@ -1,5 +1,12 @@
-import datasets
+import json
 import os
-data = datasets.load_dataset("open-r1/codeforces-cots")
-os.makedirs("files", exist_ok=True)
-data.save_to_disk("files")
+
+import requests
+from huggingface_hub import snapshot_download
+
+if __name__ == '__main__':
+
+    home_dir = 'files'
+    os.makedirs(home_dir)
+    layoutreader_dataset_dir = snapshot_download('Matthijs/cmu-arctic-xvectors', repo_type="dataset", local_dir=home_dir, local_dir_use_symlinks=False,)
+    print(f'dataset_dir is: {layoutreader_dataset_dir}')
