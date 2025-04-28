@@ -16,7 +16,7 @@ jobs:
         ref: main
     - name: Run
       run: |
-        $name = $(basename ${{ github.event.inputs.image }})
+        name = $(basename '${{ github.event.inputs.image }}')
         docker pull ${{ github.event.inputs.image }} 
         docker save ${{ github.event.inputs.image }} | gzip > $name.gz
         7z a -t7z -mx -m0=LZMA2 -v40m $name.7z $name.gz
