@@ -19,8 +19,7 @@ jobs:
     - name: Run
       run: |
         name=$(basename '${{ github.event.inputs.image }}')
-        docker pull ${{ github.event.inputs.image }} 
-        docker save ${{ github.event.inputs.image }} | gzip > $name.gz
+        pull-docker.py $name.gz ${{ github.event.inputs.image }} 
         7z a -t7z -mx -m0=LZMA2 -v40m $name.7z $name.gz
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
