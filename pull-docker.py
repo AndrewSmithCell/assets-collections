@@ -10,6 +10,8 @@ import tarfile
 import urllib3
 urllib3.disable_warnings()
 
+large_file = True
+
 if len(sys.argv) != 2 :
 	print('Usage:\n\tpull.py [registry/][repository/]image[:tag|@digest]\n')
 	exit(1)
@@ -149,13 +151,17 @@ for layer in layers:
 					progress_bar(ublob, nb_traits)
 					acc = 0
 	sys.stdout.write("\r{}: Extracting ...{}".format(ublob[7:19], " "*50)) # Ugly but works everywhere
-	with open(layerdir + '/layer.tar', "wb") as file: # Decompress gzip response
-		unzLayer = gzip.open(layerdir + '/layer_gzip.tar','rb')
-		file.write(unzLayer.read())
-		unzLayer.close()
-	os.remove(layerdir + '/layer_gzip.tar')
+	if large_file:
+		content[0]['Layers'].append(fake_layerid + '/layer_gzip.tar')
+	else:
+		with open(layerdir + '/layer.tar', "wb") as file: # Decompress gzip response
+			unzLayer = gzip.open(layerdir + '/layer_gzip.tar','rb')
+			file.write(unzLayer.read())
+			unzLayer.close()
+		os.remove(layerdir + '/layer_gzip.tar')
+		content[0]['Layers'].append(fake_layerid + '/layer.tar')
 	print("\r{}: Pull complete [{}]".format(ublob[7:19], bresp.headers['Content-Length']))
-	content[0]['Layers'].append(fake_layerid + '/layer.tar')
+	
 	
 	# Creating json file
 	file = open(layerdir + '/json', 'w')
