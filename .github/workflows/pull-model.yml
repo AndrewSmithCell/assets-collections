@@ -13,7 +13,7 @@ jobs:
     - name: download
       run: |
         pip install httpx rich
-        python ollama-dl.py qwq:4b -d models
+        python ollama-dl.py qwq -d models
     - run: |
         sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m qwq.tar.gz models
     - name: create release and upload assets
