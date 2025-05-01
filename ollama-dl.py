@@ -57,7 +57,7 @@ async def _inner_download(
     progress: Progress,
     task_id: TaskID,
 ) -> None:
-    if size < BYTES_IN_MEGABYTE:
+    if size < BYTES_IN_MEGABYTE * 40:
         resp = await client.get(url, follow_redirects=True)
         resp.raise_for_status()
         temp_path.write_bytes(resp.content)
@@ -80,11 +80,22 @@ async def _inner_download(
         if resp.status_code != (206 if start_offset else 200):
             raise ValueError(f"Unexpected status code: {resp.status_code}")
         resp.raise_for_status()
-        with temp_path.open("ab") as f:
-            async for chunk in resp.aiter_bytes(DOWNLOAD_READ_SIZE):
-                f.write(chunk)
-                progress.update(task_id, completed=f.tell())
-
+        id = 0
+        suffix = '.' + ('000' + str(id))[-3:]
+        new_tmp_path = temp_path.parent / (temp_path.name + suffix)
+        f = new_tmp_path.open("ab")
+        flen = 0
+        async for chunk in resp.aiter_bytes(DOWNLOAD_READ_SIZE):
+            f.write(chunk)
+            flen += len(chunk)
+            if flen > BYTES_IN_MEGABYTE * 40:
+                flen = 0
+                id++
+                suffix = '.' + ('000' + str(id))[-3:]
+                new_tmp_path = temp_path.parent / (temp_path.name + suffix)
+                f = new_tmp_path.open("ab")
+                                
+            progress.update(task_id, completed=f.tell())
 
 async def download_blob(
     client: httpx.AsyncClient,
