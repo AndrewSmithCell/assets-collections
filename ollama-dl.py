@@ -90,7 +90,7 @@ async def _inner_download(
             flen += len(chunk)
             if flen > BYTES_IN_MEGABYTE * 40:
                 flen = 0
-                id++
+                id += 1
                 suffix = '.' + ('000' + str(id))[-3:]
                 new_tmp_path = temp_path.parent / (temp_path.name + suffix)
                 f = new_tmp_path.open("ab")
