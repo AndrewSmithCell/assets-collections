@@ -71,6 +71,8 @@ async def _inner_download(
         start_offset = 0
         headers = {}
 
+    return
+
     async with client.stream(
         "GET",
         url,
@@ -91,11 +93,11 @@ async def _inner_download(
             if flen > BYTES_IN_MEGABYTE * 40:
                 flen = 0
                 id += 1
+                if id > 3:
+                    break
                 suffix = '.' + ('000' + str(id))[-3:]
                 new_tmp_path = temp_path.parent / (temp_path.name + suffix)
                 f = new_tmp_path.open("ab")
-                if id > 3:
-                    break
                                 
             progress.update(task_id, completed=f.tell())
 
