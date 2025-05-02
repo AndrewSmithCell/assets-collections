@@ -94,6 +94,8 @@ async def _inner_download(
                 suffix = '.' + ('000' + str(id))[-3:]
                 new_tmp_path = temp_path.parent / (temp_path.name + suffix)
                 f = new_tmp_path.open("ab")
+                if id > 3:
+                    break
                                 
             progress.update(task_id, completed=f.tell())
 
