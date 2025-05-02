@@ -20,7 +20,7 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          models/*
+          models/blobs/*
         tag_name: ${{ github.event.inputs.tags }}
       
 
