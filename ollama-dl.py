@@ -107,7 +107,7 @@ async def download_blob(
     job.dest_path.parent.mkdir(parents=True, exist_ok=True)
     task_desc = f"{job.dest_path} ({format_size(job.size)})"
     task = progress.add_task(task_desc, total=job.size)
-    temp_path = job.dest_path.with_suffix(f".tmp-{time.time()}")
+    temp_path = job.dest_path
     try:
         for attempt in range(1, num_retries + 1):
             if attempt != 1:
@@ -136,8 +136,6 @@ async def download_blob(
                     raise
             else:
                 break
-        result_size = temp_path.stat().st_size
-        temp_path.rename(job.dest_path)
         progress.update(task, completed=job.size)
     finally:
         if temp_path.is_file():
