@@ -15,12 +15,14 @@ jobs:
     - name: download
       run: |
         pip install httpx rich
-        python ollama-dl.py qwen3:30b-a3b -d models
+        python ollama-dl.py qwen3:4b -d models
+    - run: |
+        sudo 7z a -t7z -mx=1 -m0=LZMA2 -md=256k -mfb=32 -ms=32m -mmt=4 -v40m qwen3-4b.tar.gz models
     - name: create release and upload assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          models/blobs/sha256-e9183b5c18a0cf736578c1e3d1cbd4b7e98e3ad3be6176b68c20f156d54a07ac.038
+          qwen3-4b.tar.gz.*
         tag_name: ${{ github.event.inputs.tags }}
       
 
