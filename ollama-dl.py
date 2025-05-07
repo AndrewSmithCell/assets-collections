@@ -57,7 +57,7 @@ async def _inner_download(
     progress: Progress,
     task_id: TaskID,
 ) -> None:
-    if size < BYTES_IN_MEGABYTE * 40:
+    if size < BYTES_IN_MEGABYTE:
         resp = await client.get(url, follow_redirects=True)
         resp.raise_for_status()
         temp_path.write_bytes(resp.content)
@@ -84,7 +84,7 @@ async def _inner_download(
             async for chunk in resp.aiter_bytes(DOWNLOAD_READ_SIZE):
                 f.write(chunk)
                 progress.update(task_id, completed=f.tell())
-                
+
 
 async def download_blob(
     client: httpx.AsyncClient,
@@ -96,7 +96,7 @@ async def download_blob(
     job.dest_path.parent.mkdir(parents=True, exist_ok=True)
     task_desc = f"{job.dest_path} ({format_size(job.size)})"
     task = progress.add_task(task_desc, total=job.size)
-    temp_path = job.dest_path
+    temp_path = job.dest_path.with_suffix(f".tmp-{time.time()}")
     try:
         for attempt in range(1, num_retries + 1):
             if attempt != 1:
@@ -121,13 +121,12 @@ async def download_blob(
                     num_retries,
                     exc,
                 )
-
-                print('failed to download', exc)
-                
                 if attempt == num_retries:
                     raise
             else:
                 break
+        result_size = temp_path.stat().st_size
+        temp_path.rename(job.dest_path)
         progress.update(task, completed=job.size)
     finally:
         if temp_path.is_file():
@@ -151,10 +150,9 @@ async def get_download_jobs_for_image(
         raise ValueError(
             f"Unexpected media type for manifest: {manifest_media_type}",
         )
-    registry_name = 'registry.ollama.ai'
     yield DownloadJob(
         layer={},
-        dest_path=pathlib.Path(dest_dir) / "manifests" / registry_name / name / version,
+        dest_path=pathlib.Path(dest_dir) / "manifests" / name / version,
         blob_url=manifest_url,
         size=100,
     )
@@ -192,7 +190,7 @@ async def download(*, registry: str, name: str, version: str, dest_dir: str) -> 
                 if job.dest_path.is_file():
                     log.info("Already have %s", job.dest_path)
                     continue
-                if job.size > BYTES_IN_MEGABYTE * 40:
+                if job.size > BYTES_IN_MEGABYTE:
                     continue
                 tasks.append(download_blob(client, job, progress=progress))
             if tasks:
