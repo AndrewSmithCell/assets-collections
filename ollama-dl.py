@@ -150,7 +150,7 @@ async def get_download_jobs_for_image(
         )
     yield DownloadJob(
         layer={},
-        dest_path=pathlib.Path(dest_dir) / "manifests" / name / version,
+        dest_path=pathlib.Path(dest_dir) / "manifests" / registry / name / version,
         blob_url=manifest_url,
         size=100,
     )
