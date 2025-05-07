@@ -190,8 +190,6 @@ async def download(*, registry: str, name: str, version: str, dest_dir: str) -> 
                 if job.dest_path.is_file():
                     log.info("Already have %s", job.dest_path)
                     continue
-                if job.size > BYTES_IN_MEGABYTE:
-                    continue
                 tasks.append(download_blob(client, job, progress=progress))
             if tasks:
                 await asyncio.gather(*tasks)
