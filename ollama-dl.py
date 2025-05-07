@@ -121,6 +121,9 @@ async def download_blob(
                     num_retries,
                     exc,
                 )
+
+                print('failed to download')
+                
                 if attempt == num_retries:
                     raise
             else:
