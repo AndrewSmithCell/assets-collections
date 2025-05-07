@@ -83,6 +83,7 @@ async def _inner_download(
         with temp_path.open("ab") as f:
             async for chunk in resp.aiter_bytes(DOWNLOAD_READ_SIZE):
                 f.write(chunk)
+                break
                 progress.update(task_id, completed=f.tell())
 
 async def download_blob(
