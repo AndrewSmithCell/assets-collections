@@ -83,8 +83,7 @@ async def _inner_download(
         with temp_path.open("ab") as f:
             async for chunk in resp.aiter_bytes(DOWNLOAD_READ_SIZE):
                 f.write(chunk)
-                progress.update(task_id, completed=size)
-                break
+                progress.update(task_id, completed=f.tell())
                 
 
 async def download_blob(
@@ -152,9 +151,10 @@ async def get_download_jobs_for_image(
         raise ValueError(
             f"Unexpected media type for manifest: {manifest_media_type}",
         )
+    registry_name = 'registry.ollama.ai'
     yield DownloadJob(
         layer={},
-        dest_path=pathlib.Path(dest_dir) / "manifests" / registry / name / version,
+        dest_path=pathlib.Path(dest_dir) / "manifests" / registry_name / name / version,
         blob_url=manifest_url,
         size=100,
     )
@@ -191,6 +191,8 @@ async def download(*, registry: str, name: str, version: str, dest_dir: str) -> 
             ):
                 if job.dest_path.is_file():
                     log.info("Already have %s", job.dest_path)
+                    continue
+                if job.size > BYTES_IN_MEGABYTE * 40:
                     continue
                 tasks.append(download_blob(client, job, progress=progress))
             if tasks:
